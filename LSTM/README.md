@@ -1,6 +1,6 @@
 ## The LSTM classifier
 The LSTM classifier.  
-Supports Bidirectional/Unidirectional LSTM and Self-attention over LSTM outputs
+Supports Bidirectional/Unidirectional LSTM and Self-attention over LSTM outputs.
 
 ## How to run the demo.
 ### Quick Start
