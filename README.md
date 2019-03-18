@@ -8,6 +8,10 @@ Collect and Implement Neural Text Classification Models by Pytorch
 - [X] Parallel Convolutional Neural Network [Kim 2014]
 - [X] LSTM (Bidirectional/Unidirectional/Self-attention Supported)
 
+## Guidance
+
+**For detail and quick start, see the README in the corresponding folder to each model.**
+
 ## TODO LIST
 
 - [ ] Gated Convolutional Network
