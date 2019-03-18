@@ -10,12 +10,12 @@ if __package__ is None:
     from utils.dataset import PreprocessedDataset
     from utils.training import train_single_input_classifier_ff as train_model
     from utils.testing import test_single_input_classifier_ff as test_model
-    from fastText import FastText
+    from stacked_cnn import SCNN
 else:
     from utils.dataset import PreprocessedDataset
     from utils.training import train_single_input_classifier_ff as train_model
     from utils.testing import test_single_input_classifier_ff as test_model
-    from .fastText import FastText
+    from .stacked_cnn import SCNN
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-i', '--ModelID', help='Model id. If none, I will generate one based on the system time')
@@ -26,7 +26,11 @@ parser.add_argument('--Gpu', help='gpu id to use', default=None)
 
 parser.add_argument('--Batch_size', default=64, type=int)
 parser.add_argument('--Emb_dim', default=256, type=int)
-# parser.add_argument('--Sentence_length', default=64, type=int, help='max sentence length. need to match the preprocessed dataset')
+parser.add_argument('--Hidden_dim', default=256, type=int)
+parser.add_argument('--Kernel_size', default=3, type=int, help='width of the convolutional kernels')
+parser.add_argument('--Pooling_size', default=2, type=int)
+parser.add_argument('--Num_blocks', default=2, type=int, help='number of convolutional blocks. each block has two convolutional kernels and a pooling layer')
+parser.add_argument('--Sentence_length', default=64, type=int, help='max sentence length. need to match the preprocessed dataset')
 parser.add_argument('--Workers', default=0, type=int)
 parser.add_argument('--Val_split', default=0.1, type=float)
 parser.add_argument('--Early_stop_patience', default=5, type=int)
@@ -40,7 +44,11 @@ if args.Gpu is not None:
 
 batch_size = args.Batch_size
 emb_dim = args.Emb_dim
-# sentence_length = args.Sentence_length
+hidden_dim = args.Hidden_dim
+max_length = args.Sentence_length
+kernel_size = args.Kernel_size
+pooling_size = args.Pooling_size
+num_blocks = args.Num_blocks
 Workers = args.Workers
 Val_split = args.Val_split
 Early_stop_patience = args.Early_stop_patience
@@ -67,7 +75,8 @@ padding_idx = vocab.index('<pad>')
 train_path = os.path.join(work_path, 'train')
 test_path = os.path.join(work_path, 'test')
 
-model = FastText(vocab_size, emb_dim, tag_size, padding_idx=padding_idx)
+model = SCNN(vocab_size, emb_dim, hidden_dim, max_length, tag_size, padding_idx, kernel_size=kernel_size,
+                 pooling_size=pooling_size, num_blocks=num_blocks)
 train_set = PreprocessedDataset(os.path.join(train_path, 'tokens.idx'), os.path.join(train_path, 'tags.idx'))
 train_loader = torch.utils.data.DataLoader(
     dataset=train_set,
