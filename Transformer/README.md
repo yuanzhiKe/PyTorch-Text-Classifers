@@ -1,7 +1,6 @@
-## The Paralledl CNN classifier
-The CNN whose blocks are arranged in one layer proposed by [[*Kim 2014*]](http://arxiv.org/abs/1408.5882).  
-
-![Alt text](image.png?raw=true "Parallel CNN")
+## The Transformer classifier
+The classifier which employs Mult-head Self-attention Encoder.  
+As it is only for text classification, it does not contain the decoder.  
 
 ## How to run the demo.
 ### Quick Start
@@ -16,13 +15,11 @@ will automatically learn the sample data and give the test report.
 usage: train_and_test.py [-h] [-i MODELID] [--Tag_size TAG_SIZE]
                          [--Datapath DATAPATH] [--Dataset DATASET] [--Gpu GPU]
                          [--Batch_size BATCH_SIZE] [--Emb_dim EMB_DIM]
-                         [--Hidden_dim HIDDEN_DIM]
-                         [--Kernel_sizes KERNEL_SIZES [KERNEL_SIZES ...]]
-                         [--Pooling_size POOLING_SIZE]
                          [--Sentence_length SENTENCE_LENGTH]
                          [--Workers WORKERS] [--Val_split VAL_SPLIT]
                          [--Early_stop_patience EARLY_STOP_PATIENCE]
-                         [--Epochs EPOCHS]
+                         [--Epochs EPOCHS] [--Heads HEADS]
+                         [--N_layers N_LAYERS] [--Multi_gpu MULTI_GPU]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -36,11 +33,6 @@ optional arguments:
   --Gpu GPU             gpu id to use
   --Batch_size BATCH_SIZE
   --Emb_dim EMB_DIM
-  --Hidden_dim HIDDEN_DIM
-  --Kernel_sizes KERNEL_SIZES [KERNEL_SIZES ...]
-                        width of the convolutional kernels in each block.
-                        Default is [3,4,5]
-  --Pooling_size POOLING_SIZE
   --Sentence_length SENTENCE_LENGTH
                         max sentence length. need to match the preprocessed
                         dataset
@@ -48,7 +40,10 @@ optional arguments:
   --Val_split VAL_SPLIT
   --Early_stop_patience EARLY_STOP_PATIENCE
   --Epochs EPOCHS
+  --Heads HEADS
+  --N_layers N_LAYERS
+  --Multi_gpu MULTI_GPU
 ```
 
 ### Reference
- [Convolutional Neural Networks for Sentence Classification](http://arxiv.org/abs/1408.5882) (EMNLP 2014).
+ Vaswani, et al. [Attention is All You Need](https://arxiv.org/abs/1706.03762).

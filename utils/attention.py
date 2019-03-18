@@ -1,6 +1,7 @@
 '''
 Simpler than https://github.com/pytorch/fairseq/blob/master/fairseq/modules/multihead_attention.py
 However, I believe it is the same as their default setting.
+Reference: https://arxiv.org/abs/1706.03762
 '''
 
 import torch

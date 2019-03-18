@@ -1,4 +1,4 @@
-#From https://github.com/fastai/imagenet-fast/blob/master/imagenet_nv/fp16util.p
+#Reference: https://github.com/fastai/imagenet-fast/blob/master/imagenet_nv/fp16util.p
 import torch
 import torch.nn as nn
 
