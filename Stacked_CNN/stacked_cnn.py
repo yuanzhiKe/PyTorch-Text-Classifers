@@ -58,12 +58,6 @@ class SCNN(nn.Module):
         return tags
 
     def predict(self, x):
-        embedding_representations = self.emb_lookup(x)
-        embedding_representations = torch.transpose(embedding_representations, 1, 2)
-        out = self.cnn1(embedding_representations)
-        for i in range(self.num_blocks-1):
-            out = self.cnn_blocks[i](out)
-        out = out.view(x.size(0), -1)
-        tags = self.hidden2tag(out)
+        tags = self.forward(x)
         return F.softmax(tags, 1)
 

@@ -1,8 +1,6 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import copy
-from collections import OrderedDict
 
 if __package__ is None:
     import sys
@@ -64,14 +62,6 @@ class PCNN(nn.Module):
         return tags
 
     def predict(self, x):
-        embedding_representations = self.emb_lookup(x)
-        embedding_representations = torch.transpose(embedding_representations, 1, 2)
-        outs = []
-        for i in range(self.block_num):
-            out = self.blocks[i](embedding_representations)
-            out = out.view(x.size(0), -1)
-            outs.append(out)
-        out = torch.cat(outs, dim=1)
-        tags = self.hidden2tag(out)
+        tags = self.forward(x)
         return F.softmax(tags, 1)
 

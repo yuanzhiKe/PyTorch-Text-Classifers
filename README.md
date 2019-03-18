@@ -6,6 +6,7 @@ Collect and Implement Neural Text Classification Models by Pytorch
 - [X] MLP
 - [X] Stacked Convolutional Neural Network
 - [X] Parallel Convolutional Neural Network [Kim 2014]
+- [X] LSTM (Bidirectional/Unidirectional/Self-attention Supported)
 
 ## TODO LIST
 

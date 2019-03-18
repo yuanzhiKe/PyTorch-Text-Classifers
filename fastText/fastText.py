@@ -24,7 +24,5 @@ class FastText(nn.Module):
         return self.hidden2tag(out)
 
     def predict(self, x):
-        embedding_representations = self.emb_lookup(x)
-        out = torch.sum(embedding_representations, 1)
-        out = self.hidden2tag(out)
+        out = self.forward(x)
         return F.softmax(out, 1)

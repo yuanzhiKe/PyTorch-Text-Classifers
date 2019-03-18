@@ -42,12 +42,6 @@ class MLP(nn.Module):
         return out
 
     def predict(self, x):
-        x = self.emb_lookup(x)
-        x = torch.sum(x, 1)
-        x = self.emb2hidden(x)
-        if self.map_layers is not None:
-            for i in range(self.n_layers):
-                x = self.map_layers[i](x)
-        out = self.hidden2tag(x)
+        out = self.forward(x)
         return F.softmax(out, 1)
 
