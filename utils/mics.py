@@ -1,8 +1,8 @@
-import os
 import torch
+import torch.nn as nn
 from torch.autograd import Variable
 import numpy as np
-import pickle
+import copy
 
 
 def is_number(s):
@@ -58,3 +58,7 @@ def nopeak_mask(size, opt):
 def create_mask(src, padding_idx):
     src_mask = (src != padding_idx).unsqueeze(-2)
     return src_mask
+
+
+def get_clones(module, N):
+    return nn.ModuleList([copy.deepcopy(module) for i in range(N)])
