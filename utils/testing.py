@@ -24,9 +24,9 @@ def test_model(train_id, model, test_loader, test_batch, test_set_len, tag_size,
     model.cuda()
     test_predictions, test_labels, accumulated_loss, batch_num, correct, total, true_labels, test_judgments = \
         predict_func(test_set_len, test_batch, tag_size, test_loader, model)
-    pickle.dump(test_predictions, open(os.path.join(test_path, str(train_id) + '_test_predictions.pkl'), 'wb'))
-    pickle.dump(test_judgments, open(os.path.join(test_path, str(train_id) + '_test_judgments.pkl'), 'wb'))
-    pickle.dump(test_labels, open(os.path.join(test_path, str(train_id) + '_test_labels.pkl'), 'wb'))
+    pickle.dump(test_predictions, open(str(train_id) + '_test_predictions.pkl'), 'wb')
+    pickle.dump(test_judgments, open(str(train_id) + '_test_judgments.pkl'), 'wb')
+    pickle.dump(test_labels, open(str(train_id) + '_test_labels.pkl'), 'wb')
     test_loss = accumulated_loss / batch_num
     print('Testing Error: ', test_loss)
     print('Accuracy: ', accuracy_score(true_labels, test_labels))
