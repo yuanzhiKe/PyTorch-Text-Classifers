@@ -16,7 +16,7 @@ Collect and Implement Neural Text Classification Models by Pytorch
 
 ## Guidance
 
-**For detail and quick start, see the README in the corresponding folder to each model.**
+**For details and quick start, see the README in the corresponding folder to each model.**
 
 ## TODO LIST
 
